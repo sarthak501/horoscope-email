@@ -40,7 +40,7 @@ def e():
     # Connect to SMTP server and send email
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login(email, "gzhu msuj seka iabq")
+    server.login(email, "pujf ffhc cnum upaz")
     server.sendmail(email, receiver_email, msg.as_string())
     print("Email sent successfully!")
 
