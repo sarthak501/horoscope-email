@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import requests
 from bs4 import BeautifulSoup
+import os  # To access environment variables
 
 def horoscope():
     url = "https://www.bhaskar.com/rashifal/1/today/"
@@ -27,6 +28,12 @@ def e():
     subject = "Today's Horoscope"
     message = horoscope()
 
+    # Fetch the password from environment variables
+    password = os.getenv("GMAIL_PASSWORD")
+    if not password:
+        print("Error: Gmail password is not set in environment variables.")
+        return
+
     # Create message container
     msg = MIMEMultipart()
     msg['From'] = email
@@ -40,9 +47,8 @@ def e():
     # Connect to SMTP server and send email
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.starttls()
-    server.login(email, "pujf ffhc cnum upaz")
+    server.login(email, password)
     server.sendmail(email, receiver_email, msg.as_string())
     print("Email sent successfully!")
 
 e()
-    
